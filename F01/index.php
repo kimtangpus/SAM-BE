@@ -14,6 +14,9 @@ $sizeResult = mysqli_query($conn, $sizeQuery);
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <link rel="icon" href="https://i.postimg.cc/FHxQjQZ4/doggo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Athiti:wght@200;300;400;500;600;700&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -61,7 +64,7 @@ $sizeResult = mysqli_query($conn, $sizeQuery);
 
 
 
-  <section id="doggos" class="pt-2 mt-2">
+  <section id="doggos" class="py-2 mt-2">
     <div class="container mt-5">
       <div class="container">
         <h1 class="text-center pt-5" style="font-size:50px; color: #0078D0;">Dog Sizes</h1>
@@ -76,7 +79,6 @@ $sizeResult = mysqli_query($conn, $sizeQuery);
         <div class="row" id="dogs">
           <?php
           $dogQuery = "SELECT breedName, description, image, backgroundColor, shortDescription FROM dogBreeds WHERE sizeID = {$size['sizeID']} LIMIT 4";
-
           $dogResult = mysqli_query($conn, $dogQuery);
 
           while ($dog = mysqli_fetch_assoc($dogResult)) {
@@ -85,10 +87,10 @@ $sizeResult = mysqli_query($conn, $sizeQuery);
             <div class="card border-green" style="background-color: <?php echo $dog['backgroundColor']; ?>;">
               <img class="card-img" src="<?php echo $dog['image']; ?>" alt="<?php echo $dog['breedName']; ?>">
               <div class="card-body">
-                <h3 class="card-title">
+                <h3 class="card-title pb-2">
                   <?php echo $dog['breedName']; ?>
                 </h3>
-                <p class="desc">
+                <p class="desc pb-3">
                   <?php echo $dog['description']; ?>
                 </p>
                 <button type="button" class="btn btn-primary" data-toggle="modal"
@@ -134,7 +136,7 @@ $sizeResult = mysqli_query($conn, $sizeQuery);
     </div>
   </section>
 
-  <section id="contact" class="py-5">
+  <section id="contact" class="py-2 mt-2">
     <div class="container">
       <h1 class="display-3 p-5" style="font-size: 50px; text-align: center; color: #0078D0;">
         <strong>Contact Woofopedia</strong>
@@ -147,7 +149,7 @@ $sizeResult = mysqli_query($conn, $sizeQuery);
             information, or want to collaborate on a project, feel free to reach out. We'd love to hear from you and are
             always excited to help with anything dog-related!
           </p>
-          <p style="color: #00A651;"><strong>Email:</strong> woofopedia@example.com</p>
+          <p style="color: #00A651;"><strong>Email:</strong> woofopedia@gmail.com</p>
           <p style="color: #00A651;"><strong>Phone:</strong> +63 915 491 1117</p>
           <p style="color: #00A651;"><strong>Address:</strong> Tanauan City, Batangas</p>
         </div>
@@ -185,6 +187,7 @@ $sizeResult = mysqli_query($conn, $sizeQuery);
   <style>
     html {
       scroll-behavior: smooth;
+      font-family: 'Roboto', sans-serif;
     }
 
     body {
@@ -295,6 +298,15 @@ $sizeResult = mysqli_query($conn, $sizeQuery);
       border-radius: 20px;
       border: none;
       transition: background-color 0.3s ease;
+    }
+
+    section {
+    background-color: #ffffff; 
+    border: 1px solid #ccc;
+    padding: 20px;  
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  
+    border-radius: 10px;  
+
     }
 
     .btn:hover {
