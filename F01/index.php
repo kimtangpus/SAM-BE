@@ -16,15 +16,15 @@ $sizeResult = mysqli_query($conn, $sizeQuery);
   <link rel="icon" href="https://i.postimg.cc/FHxQjQZ4/doggo.png">
 </head>
 
-<body class="bg-white">
+<body>
 
-  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+  <nav class="navbar navbar-expand-lg fixed-top">
     <a class="navbar-brand" href="#home">
       <img src="https://i.postimg.cc/8PjFKtY9/doggo.png" class="fas fa-bed mr-2"></i>
     </a>
     <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav"
       aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+      <span style="color: #FFFFFF;"><i class="fa-solid fa-bars"></i></span>
     </button>
     <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
       <ul class="navbar-nav">
@@ -41,30 +41,42 @@ $sizeResult = mysqli_query($conn, $sizeQuery);
     </div>
   </nav>
 
-  <section id="home">
-    <div class="text">
-      <h1>Welcome to Woofopedia</h1>
-      <p>Discover the world of dogs</p>
-      <a href="#doggos" class="btn btn-lg btn-light">Explore</a>
+  <section class="home" id="home">
+  <div class="container-fluid">
+    <div class="row align-items-center px-5">
+     
+      <div class="col-md-6 pb-5">
+        <h1 class="display-4"><span style=" color: #0078D0;">Welcome to Woofopedia</span></h1>
+        <p class="lead"><span style=" color: #00A651;">Discover and learn about your favorite dog breeds</span></p>
+        <a href="#doggos" class="btn btn-lg btn-light ">Explore</a>
+      </div>
+
+      <div class="col-md-6">
+      <img src="https://i.postimg.cc/FHFQcVwG/dogs.jpg" class="img-fluid img-border rounded-5" alt="Dogs"/>
+      </div>
     </div>
-  </section>
+  </div>
+</section>
+
+
 
 
   <section id="doggos" class="pt-2 mt-2">
     <div class="container mt-5">
       <div class="container">
-        <h1 class="text-center pt-5" style="font-size:50px; color: #00A3E0;">Dog Sizes</h1>
+        <h1 class="text-center pt-5" style="font-size:50px; color: #0078D0;">Dog Sizes</h1>
       </div>
       <?php while ($size = mysqli_fetch_assoc($sizeResult)) { ?>
       <div class="container">
         <div class="row my-5">
-          <h2 class="display-3 text-center w-100" style="font-size: 35px; color: #D50032;">
+          <h2 class="display-3 text-center w-100" style="font-size: 35px; color: #F0282D;">
             <?php echo $size['sizeName']; ?>
           </h2>
         </div>
         <div class="row" id="dogs">
           <?php
-          $dogQuery = "SELECT breedName, description, image, backgroundColor FROM dogBreeds WHERE sizeID = {$size['sizeID']} LIMIT 4";
+          $dogQuery = "SELECT breedName, description, image, backgroundColor, shortDescription FROM dogBreeds WHERE sizeID = {$size['sizeID']} LIMIT 4";
+
           $dogResult = mysqli_query($conn, $dogQuery);
 
           while ($dog = mysqli_fetch_assoc($dogResult)) {
@@ -87,7 +99,6 @@ $sizeResult = mysqli_query($conn, $sizeQuery);
             </div>
           </div>
 
-          <!-- Modal -->
           <div class="modal fade" id="dogModal<?php echo str_replace(' ', '', $dog['breedName']); ?>" tabindex="-1"
             aria-labelledby="dogModalLabel<?php echo str_replace(' ', '', $dog['breedName']); ?>" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
@@ -102,9 +113,11 @@ $sizeResult = mysqli_query($conn, $sizeQuery);
                 </div>
                 <div class="modal-body">
                   <img class="img-fluid" src="<?php echo $dog['image']; ?>" alt="<?php echo $dog['breedName']; ?>">
-                  <p class="mt-2">
-                    <?php echo $dog['description']; ?>
-                  </p>
+                  <div class="modal-body">
+  
+
+  <p><strong>Quick Info:</strong> <?php echo $dog['shortDescription']; ?></p>
+</div>
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -121,12 +134,12 @@ $sizeResult = mysqli_query($conn, $sizeQuery);
 
   <section id="contact" class="py-5">
     <div class="container">
-      <h1 class="display-3 p-5" style="font-size: 50px; text-align: center; color: #0081C8;">
+      <h1 class="display-3 p-5" style="font-size: 50px; text-align: center; color: #0078D0;">
         <strong>Contact Woofopedia</strong>
       </h1>
       <div class="row">
         <div class="col-md-6 mb-3">
-          <h5 style="color: #EE334E;"><strong>Get in Touch</strong></h5>
+          <h5 style="color: #F0282D;"><strong>Get in Touch</strong></h5>
           <p>
             Thank you for visiting Woofopedia! If you have any questions about dog breeds, need assistance with dog care
             information, or want to collaborate on a project, feel free to reach out. We'd love to hear from you and are
@@ -160,10 +173,10 @@ $sizeResult = mysqli_query($conn, $sizeQuery);
   </section>
 
   <footer class="text-center py-3" style="background-color: #000000;">
-    <p style="color: #F4C300;">All rights reserved.</p>
+    <p style="color: #FFB114;">All rights reserved.</p>
   </footer>
 
-  <!-- Ensure proper order of scripts -->
+ 
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
 
@@ -178,7 +191,7 @@ $sizeResult = mysqli_query($conn, $sizeQuery);
 
     .navbar {
       padding: 10px 20px;
-      background-color: #fff;
+      background-color: #000000;
       top: 0;
       position: fixed;
       width: 100%;
@@ -192,30 +205,41 @@ $sizeResult = mysqli_query($conn, $sizeQuery);
     }
 
     .nav-link {
-      color: #3E3E3E;
+      color: #FFB114;
       font-size: 20px;
       transition: color 0.3s ease, background-color 0.3s ease;
     }
 
     .nav-link:hover {
-      color: #ffffff;
-      background-color: #00A3E0;
+      background-color: #F0282D;
       border-radius: 5px;
     }
 
-    #home{
-      background: url('https://i.postimg.cc/yxLbQgKK/dogs.png'); 
-      background-repeat: no-repeat;
-      background-position: center; 
-      background-size: 1000px 600px;
-      background-color: #F4C300;
-      height: 100vh; 
-      display: flex; 
-      align-items: center; 
-      justify-content: center; 
-      color: white; 
-      text-align: center;">
-    }
+ 
+    .home {
+  padding: 100px 0;
+  background-color: #FFFFFF;
+}
+
+.home h1 {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.home p {
+  font-size: 1.2rem;
+  color: #666;
+}
+
+.home img {
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.img-border {
+  border: 5px solid #0078D0; 
+}
+
     .text h1{
       font-size: 80px;
     }
@@ -248,38 +272,81 @@ $sizeResult = mysqli_query($conn, $sizeQuery);
     .card:hover {
       transform: scale(1.05);
     }
+    .card-title{
+      color: #FFFFFF;
+      font-size: 24px;
+      font-weight: bold;
+    }
 
 
     .desc {
-      color: #3E3E3E;
+      color: #FFFFFF;
       font-size: 16px;
     }
 
     .btn {
-      background-color: #00A3E0;
+      background-color: #FFB114;
+      color: #000000;
       border-radius: 20px;
       border: none;
       transition: background-color 0.3s ease;
     }
 
     .btn:hover {
-      background-color: #D50032;
-      /* Red */
+      background-color: #F0282D;
+     
     }
+ 
+  .modal-content {
+    border-radius: 20px;
+    background-color: #0078D0; 
+    color: #FFFFFF; 
+  }
 
-    .modal-content {
-      border-radius: 20px;
-    }
+ 
+  .modal-header {
+    border-bottom: none;
+    background-color: #0078D0; 
+    color: #FFFFFF; 
+  }
 
-    #contact .btn {
+  .modal-title {
+    color: #FFFFFF;
+  }
 
-      color: #000000;
-      background-color: #F4C300;
-    }
+  
+  .modal-footer {
+    background-color: #0078D0; 
+    border-top: none;
+  }
+
+  
+  .close {
+    color: #FFFFFF;
+    opacity: 1;
+  }
+
+ 
+  .btn-secondary {
+    background-color: #FFB114; 
+    color: #000000; 
+    border-radius: 20px;
+    border: none;
+  }
+
+  .btn-secondary:hover {
+    background-color: #F0282D; 
+    color: #FFFFFF; 
+  }
+
+  .modal-body {
+    color: #FFFFFF;
+  }
+
 
     #contact .btn:hover {
-      background-color: #D50032;
-      /* Red */
+      background-color: #F0282D;
+
     }
 
     .form-control {
@@ -287,9 +354,9 @@ $sizeResult = mysqli_query($conn, $sizeQuery);
     }
 
     footer {
-      background-color: #1C1C1E;
-      color: #F6EB61;
-      /* Yellow text for footer */
+      background-color: #000000;
+      color: #FFB114;
+ 
     }
   </style>
 </body>
